@@ -52,6 +52,10 @@ class Graph(Generic[V]):
     # Encontra os vértices aos quais um vértice com determinado índice está conectado
     def neighbors_for_index(self, index: int) -> list[V]:
         return list(map(self.vertex_at, [e.v for e in self._edges[index]]))
+    
+    # Consulta o índice de um vértice e encontra seus vizinhos (método auxiliar)
+    def neighbors_for_vertex(self, vertex: V) -> list[V]:
+        return self.neighbors_for_index(self.index_of(vertex))
 
     # Devolve todas as arestas associadas a um vértice em um índice
     def edges_for_index(self, index: int) -> list[Edge]:
@@ -102,3 +106,13 @@ if __name__ == '__main__':
     city_graph.add_edge_by_vertices("New York", "Philadelphia")
     city_graph.add_edge_by_vertices("Philadelphia", "Washington")
     print(city_graph)
+
+    from generic_search import bfs, Node, node_to_path
+
+    bfs_result: Optional[Node[V]] = bfs("Boston", lambda x: x == "Miami", city_graph.neighbors_for_vertex)
+    if bfs_result is None:
+        print("No solution fpimd isomg breadth-first search!")
+    else:
+        path: list[V] = node_to_path(bfs_result)
+        print("Path from Boston to Miami:")
+        print(path)
