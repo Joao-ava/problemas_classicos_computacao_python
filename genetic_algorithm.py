@@ -11,7 +11,7 @@ C = TypeVar('C', bound=Chromosome) # tipos dos cromossomos
 
 
 class GenericAlgorithm(Generic[C]):
-	SelectionType = Enum("SelectionType", "ROULATE TOURNAMENT")
+	SelectionType = Enum("SelectionType", "ROULETTE TOURNAMENT")
 
 	def __init__(
 		self, initial_population: list[C], threshold: float, max_generations: int = 100, mutation_chance: float = 0.1,
