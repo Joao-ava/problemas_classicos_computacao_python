@@ -1,29 +1,25 @@
 from __future__ import annotations
-from typing import TypeVar, Tuple, Type
+from typing import TypeVar, Type
 from abc import ABC, abstractmethod
 
 
-T = TypeVar('T', bound="Chromosome")
+T = TypeVar('T', bound='Chromosome')
 
 
 class Chromosome(ABC):
 	@abstractmethod
 	def fitness(self) -> float:
-		pass
-
+		...
 
 	@classmethod
 	@abstractmethod
-	def random_instance(cls, TypeVar[T]) -> T:
-		pass
-
+	def random_instance(cls: Type[T]) -> T:
+		...
 
 	@abstractmethod
-	def crossover(self: T, other: T) -> Tuple[T, T]:
-		pass
-
+	def crossover(self: T, other: T) -> tuple[T, T]:
+		...
 
 	@abstractmethod
 	def mutate(self) -> None:
-		pass
-		
+		...
