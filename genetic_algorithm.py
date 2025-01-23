@@ -10,7 +10,7 @@ from chromosome import Chromosome
 C = TypeVar('C', bound=Chromosome) # tipos dos cromossomos
 
 
-class GenericAlgorithm(Generic[C]):
+class GeneticAlgorithm(Generic[C]):
 	SelectionType = Enum("SelectionType", "ROULETTE TOURNAMENT")
 
 	def __init__(
@@ -22,7 +22,7 @@ class GenericAlgorithm(Generic[C]):
 		self._max_generations: int = max_generations
 		self._mutation_chance: float = mutation_chance
 		self._crossover_chance: float = crossover_chance
-		self._selection_type: GenericAlgorithm.SelectionType = selection_type
+		self._selection_type: GeneticAlgorithm.SelectionType = selection_type
 		self._fitness_key: Callable = type(self._population[0]).fitness
 
 	# Usa a roleta de distribuição de probabilidades para escolher dois pais
@@ -43,8 +43,8 @@ class GenericAlgorithm(Generic[C]):
 		# continua até ter completado a nova geração
 		while len(new_population) < len(self._population):
 			# escolhe os 2 pais
-			if self._selection_type == GenericAlgorithm.SelectionType.ROULETTE:
-				parents: tuple[C, C] = self._pick_roulette(self._population)
+			if self._selection_type == GeneticAlgorithm.SelectionType.ROULETTE:
+				parents: tuple[C, C] = self._pick_roulette([x.fitness() for x in self._population])
 			else:
 				parents: tuple[C, C] = self._pick_tournament(len(self._population) // 2)
 			# faz um possível crossover dos dois pais

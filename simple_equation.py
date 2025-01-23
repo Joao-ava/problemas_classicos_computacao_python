@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Type
 
 from chromosome import Chromosome
-from genetic_algorithm import GenericAlgorithm
+from genetic_algorithm import GeneticAlgorithm
 from random import randrange, random
 from copy import deepcopy
 
@@ -45,8 +45,8 @@ class SimpleEquation(Chromosome):
 
 if __name__ == '__main__':
 	initial_population: list[SimpleEquation] = [SimpleEquation.random_instance() for _ in range(20)]
-	ga: GenericAlgorithm[SimpleEquation] = GenericAlgorithm(initial_population=initial_population, threshold=13,
-															max_generations=100, mutation_chance=0.1,
-															crossover_chance=0.1)
+	ga: GeneticAlgorithm[SimpleEquation] = GeneticAlgorithm(initial_population=initial_population, threshold=13,
+	                                                        max_generations=100, mutation_chance=0.1,
+	                                                        crossover_chance=0.1)
 	result: SimpleEquation = ga.run()
 	print(result)
